@@ -28,7 +28,7 @@ function Chat_tile(props, key) {
           <span>{props.Name==props.LoggedUser? "You": props.Nickname}</span>
           <p className="last_msg">{props.last}</p>
         </div>
-        <span class={props.unread != 0?"circle ":"" }>{props.unread != 0?props.unread:""}</span>
+        <span className={props.unread != 0?"circle ":"" }>{props.unread != 0?props.unread:""}</span>
         <span className="friend_time col-2">{props.date}</span>
       </div>
     </>

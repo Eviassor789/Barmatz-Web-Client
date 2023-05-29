@@ -12,9 +12,12 @@ function My_name_area(props) {
     <>
 
       <div id="my_name_area" className={props.Mode}>
-        <img src={users.get(props.LoggedUser).getPicture()} alt="" ></img>
+        {/* <img src={users.get(props.LoggedUser).getPicture()} alt="" ></img> */}
+        <img src="#" alt="" ></img>
 
-        <span id="my_name" className={props.Mode}>{users.get(props.LoggedUser).getNickname()}</span>
+
+        {/* <span id="my_name" className={props.Mode}>{users.get(props.LoggedUser).getNickname()}</span> */}
+        <span id="my_name" className={props.Mode}>some name</span>
         <button
           id="add_button"
           type="button"

@@ -174,22 +174,6 @@ function Register(props) {
 
     console.log("user added succesfuly!");
 
-    const data_for_token = {
-      username: Name_input.current.value,
-      password: Password_input.current.value,
-    };
-
-    const res_for_token = await fetch("http://localhost:5000/api/Tokens", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data_for_token),
-    });
-
-    const json = await res_for_token;
-    if (res_for_token.status == 200) {
-      console.log("bearer " + json.text);
-    }
-
     Enter_link.current.click();
   };
 

@@ -34,7 +34,7 @@ function Login(props) {
     incorrect2.innerHTML = "";
   }
 
-  const validation = function () {
+  const validation = async function () {
     var incorrect = document.getElementById("incorrect");
     if (Name_input.current.value == "" || Password_input.current.value == "") {
       console.log("empty");
@@ -43,6 +43,33 @@ function Login(props) {
       Password_input.current.addEventListener("input", cleanIncorrect);
       return;
     }
+
+    const data_for_token = {
+      // "username": Name_input.current.value,
+      // "password": Password_input.current.value,
+      "username": "watari",
+      "password": "www",
+    };
+
+    const res_for_token = await fetch("http://localhost:5000/api/Tokens", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data_for_token),
+    });
+
+    const json = await res_for_token;
+    // if (res_for_token.status != 200) {
+    //   incorrect.innerHTML = "username or password are incorrect";
+    //   Name_input.current.addEventListener("input", cleanIncorrect);
+    //   Password_input.current.addEventListener("input", cleanIncorrect);
+    //   return;
+    // }
+
+    console.log("yes");
+    props.SetLoggedUser(Name_input.current.value);
+    // props.SetLoggedUser_token(res_for_token.text);
+    Enter_link.current.click();
+    
     if (users.get(Name_input.current.value) == null) {
       console.log("who???");
       incorrect.innerHTML = "username or password are incorrect";
@@ -61,6 +88,7 @@ function Login(props) {
       Password_input.current.addEventListener("input", cleanIncorrect);
     }
   };
+
 
   return (
     <>
