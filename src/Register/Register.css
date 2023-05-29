@@ -1,0 +1,135 @@
+#upperBlockRegister {
+    position: relative;
+    background-color: #00a884;
+    height: 35vh;
+    width: 100%;
+    z-index: -1;
+}
+
+#lowerBlock {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    z-index: -1;
+    display: flex;
+    background-color: #111b21
+}
+
+#Register-container{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 6%;
+    right: 0px;
+    margin: auto;
+
+    height: fit-content;
+    width: 50%;
+
+    border-radius: 20pt;
+    border: 2px;
+    border-color: white;
+    border-style: solid;
+    background: rgb(236, 237, 237);
+    box-shadow: 0 0 10px 0px black
+
+}
+
+.row{
+    margin: 15px;
+}
+
+.col-form-label{
+    font-size: larger;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.register{
+    text-align: center;
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input{
+    margin-top: 10px;
+}
+
+.btn{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+}
+
+.row>img {
+    width: 25%;
+    
+}
+
+#Image_div>.image>img {
+    border-radius: 0%;
+    height: 150px;
+    margin-top: 12px;
+}
+
+.btn-success {
+    background-color: #00a884;
+}
+.btn-success:hover {
+    background-color: #008c6e;
+}
+
+#login {
+    text-align: center;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    border-radius: 0%;
+    border-radius: 5pt;
+
+}
+
+#login:active {
+    background-color: #007a60;
+}
+
+#logo-Register {
+    position: absolute;
+    right: 10vh;
+    top: 0px;
+    bottom: 30%;
+    margin: auto;
+    border-radius: 0%;
+}
+
+#rules {
+    color: rgba(255, 0, 0, 0.733);
+    font-size: small;
+    tab-size: 8;
+    line-height: 1.3;
+}
+
+#verifyDiv {
+    color: rgba(255, 0, 0, 0.733);
+    font-size: small;
+    tab-size: 8;
+    line-height: 1.3;
+}
+
+#emptyDiv {
+    color: rgba(255, 0, 0, 0.733);
+    font-size: small;
+    tab-size: 8;
+    line-height: 1.3;
+}
+
+#nameDiv {
+    color: rgba(255, 0, 0, 0.733);
+    font-size: small;
+    tab-size: 8;
+    line-height: 1.3;
+}
+
+br{
+    line-height: 1.3;
+}

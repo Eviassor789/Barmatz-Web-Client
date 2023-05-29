@@ -1,0 +1,48 @@
+#input_area {
+    position: absolute;
+    background-color: rgb(42, 42, 42);
+    height: 50px;
+    bottom: 0px;
+    width: 100%;
+}
+
+#input_area.light_mode {
+    background-color: wheat;
+}
+
+#input_area>input {
+    position: relative;
+    height: 76%;
+    margin: 5px;
+    border-radius: 15pt;
+    padding-left: 2.3%;
+
+}
+
+#input_area>button {
+    position: relative;
+    border-radius: 50%;
+    /* top: 0px; */
+    /* bottom: 0px; */
+    /* right: 0px; */
+    /* left: 0px; */
+    margin: auto;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    background-color: rgb(102, 138, 255);
+
+    border: 1px;
+    /* width: 10%; */
+    border-color: #010202;
+    border-style: solid;
+
+
+}
+
+#input_area>button:hover {
+    background-color: rgba(104, 68, 136, 0.349);
+}
+
+#input_area>button:active {
+    background-color: rgba(44, 28, 57, 0.349);
+}

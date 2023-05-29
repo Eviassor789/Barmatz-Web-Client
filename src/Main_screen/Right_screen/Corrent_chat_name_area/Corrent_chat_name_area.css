@@ -1,0 +1,103 @@
+
+
+#corrent_chat_name_area {
+    height: 80px;
+    align-items: center;
+    display: flex;
+    background-color: rgb(49, 49, 49);
+    /* border-bottom-color: #b0b0b049;
+    border: 1px;
+    border-style: solid; */
+
+}
+
+#corrent_chat_name_area>img {
+    
+    width: 60px;
+    height: 60px; 
+    margin-left: 15px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+
+#corrent_chat_name_area>.friend_name{
+    font-size: x-large;
+    text-align: left;
+    margin-left: 15px;
+    font-family: serif;
+    color: rgb(255, 255, 255);
+
+}
+
+
+
+.logout {
+    position: relative;
+    right: 2vh;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+}
+
+.color {
+    position: relative;
+    right: 30px;
+}
+
+/* light_mode */
+
+
+#corrent_chat_name_area.light_mode {
+
+    background-color: #00a884;
+    border-bottom-color: black;
+
+
+}
+
+.bi-brightness-high-fill {
+    color: white;
+}
+
+.btn-dark {
+    background-color: #f5f5f500;
+    border: #f5f5f500;
+}
+
+.btn-warning {
+    color: rgb(255, 0, 0);
+    background-color: #00a88400;
+}
+
+.logout:hover {
+    color: rgb(255, 0, 0);
+}
+
+.bi-box-arrow-right{
+    color: rgb(255, 0, 0);
+}
+
+.color:active {
+    border-color: #00a88400;
+    background-color: rgba(184, 184, 184, 0.208);
+}
+
+.btn-dark:hover {
+    /* color: rgb(223, 223, 223); */
+    background-color: #f5f5f500;
+}
+
+.btn-dark:active {
+    background-color: rgba(184, 184, 184, 0.208);
+}
+
+#log:active {
+    background-color: rgba(184, 184, 184, 0.208);
+
+}
+
+#sun:active {
+    background-color: rgba(184, 184, 184, 0.208);
+
+}

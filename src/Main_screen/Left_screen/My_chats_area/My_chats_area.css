@@ -1,0 +1,8 @@
+#my_chats_area {
+    position: absolute;
+    bottom: 0px;
+    top: 80px;
+    width: 100%;
+    border-bottom: 1px
+}
+

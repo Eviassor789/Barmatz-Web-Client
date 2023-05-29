@@ -1,0 +1,40 @@
+img {
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+
+
+#left_screen {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgb(49, 49, 49);
+    /* background-color: #3d3f40; */
+    border: 1.5px;
+    border-style: solid;
+    /* border-color: #b0b0b049; */
+    border-right-color: #b0b0b049;
+    border-bottom-color: #b0b0b049;
+    z-index: -2;
+
+
+    padding: 0px;
+    /* flex-flow: column; */
+
+}
+
+/* light_mode */
+
+#left_screen.light_mode {
+
+    border-right-width: 1px;
+
+    background-color: #00a884;
+    border-right-color: #00a884;
+    border-top-color: #00a884;
+    border-bottom-color: #00a884;
+}
+
