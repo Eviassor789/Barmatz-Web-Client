@@ -45,48 +45,53 @@ function Login(props) {
     }
 
     const data_for_token = {
-      // "username": Name_input.current.value,
-      // "password": Password_input.current.value,
-      "username": "watari",
-      "password": "www",
+      "username": Name_input.current.value,
+      "password": Password_input.current.value,
     };
 
-    const res_for_token = await fetch("http://localhost:5000/api/Tokens", {
+      const res_for_token = await fetch("http://localhost:5000/api/Tokens", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {  "accept": "*/*",
+                  "Content-Type": "application/json" },
       body: JSON.stringify(data_for_token),
     });
+    
+    const token = await res_for_token.text();
+    console.log("res_for_token " + token);
+    
+    if (res_for_token.status != 200) {
+      incorrect.innerHTML = "username or password are incorrect";
+      Name_input.current.addEventListener("input", cleanIncorrect);
+      Password_input.current.addEventListener("input", cleanIncorrect);
+      return;
+    }
+    
+    
 
-    const json = await res_for_token;
-    // if (res_for_token.status != 200) {
+    console.log("yes");
+    await props.SetLoggedUser(Name_input.current.value);
+    console.log("logged_ " + props.LoggedUser);
+
+    props.SetLoggedUser_token(token);
+    Enter_link.current.click();
+    
+    // if (users.get(Name_input.current.value) == null) {
+    //   console.log("who???");
     //   incorrect.innerHTML = "username or password are incorrect";
     //   Name_input.current.addEventListener("input", cleanIncorrect);
     //   Password_input.current.addEventListener("input", cleanIncorrect);
-    //   return;
+    //   return; //password or username are incorrect
     // }
-
-    console.log("yes");
-    props.SetLoggedUser(Name_input.current.value);
-    // props.SetLoggedUser_token(res_for_token.text);
-    Enter_link.current.click();
-    
-    if (users.get(Name_input.current.value) == null) {
-      console.log("who???");
-      incorrect.innerHTML = "username or password are incorrect";
-      Name_input.current.addEventListener("input", cleanIncorrect);
-      Password_input.current.addEventListener("input", cleanIncorrect);
-      return; //password or username are incorrect
-    }
-    if (users.get(Name_input.current.value).Password
-     == Password_input.current.value) {
-      console.log("yes");
-      props.SetLoggedUser(Name_input.current.value);
-      Enter_link.current.click();
-    } else {
-      incorrect.innerHTML = "username or password are incorrect";
-      Name_input.current.addEventListener("input", cleanIncorrect);
-      Password_input.current.addEventListener("input", cleanIncorrect);
-    }
+    // if (users.get(Name_input.current.value).Password
+    //  == Password_input.current.value) {
+    //   console.log("yes");
+    //   props.SetLoggedUser(Name_input.current.value);
+    //   Enter_link.current.click();
+    // } else {
+    //   incorrect.innerHTML = "username or password are incorrect";
+    //   Name_input.current.addEventListener("input", cleanIncorrect);
+    //   Password_input.current.addEventListener("input", cleanIncorrect);
+    // }
   };
 
 

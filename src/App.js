@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Login SetLoggedUser={SetLoggedUser} SetLoggedUser_token={SetLoggedUser_token}/>}
+          element={<Login SetLoggedUser={SetLoggedUser} SetLoggedUser_token={SetLoggedUser_token} LoggedUser={LoggedUser}/>}
         ></Route>
         <Route path="/Register" element={<Register SetFile={SetFile}/>}></Route>
         <Route

@@ -42,15 +42,15 @@ function Input_area(props) {
     }
     let NowTime = H + ":" + M;
 
-    users
-      .get(props.LoggedUser)
-      .AddNewMsgTo(props.CurrentFriend, input.current.value, NowTime);
+    // users
+    //   .get(props.LoggedUser)
+    //   .AddNewMsgTo(props.CurrentFriend, input.current.value, NowTime);
 
-      if(props.LoggedUser != props.CurrentFriend){
-        users
-        .get(props.CurrentFriend)
-        .AddNewMsgFrom(props.LoggedUser, input.current.value, NowTime);
-      }
+    //   if(props.LoggedUser != props.CurrentFriend){
+    //     users
+    //     .get(props.CurrentFriend)
+    //     .AddNewMsgFrom(props.LoggedUser, input.current.value, NowTime);
+    //   }
 
 
     props.setState(!props.state);

@@ -61,9 +61,8 @@ function easy_msg(from, to, txt, time){
   users.get(from).AddNewMsgTo(to, txt, time);
 }
 
-console.log(users);
-console.log();
-console.log();
+// console.log(users);
+
 
 easy_new_friend("watari", "Unknown");
 easy_new_friend("watari", "yagami");

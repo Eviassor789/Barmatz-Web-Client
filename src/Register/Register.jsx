@@ -141,11 +141,31 @@ function Register(props) {
       return;
     }
 
+    function toDataURL(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    }
+    
+    var picUrl;
+    toDataURL(URL.createObjectURL(Picture_input.current.files[0]), function(dataUrl) {
+      picUrl = dataUrl
+    })
+    
+
     const data = {
       username: Name_input.current.value,
       password: Password_input.current.value,
       displayName: Nickname_input.current.value,
-      profilePic: Picture_input.current.value,
+      profilePic: URL.createObjectURL(Picture_input.current.files[0]),
     };
 
     const res = await fetch("http://localhost:5000/api/Users", {

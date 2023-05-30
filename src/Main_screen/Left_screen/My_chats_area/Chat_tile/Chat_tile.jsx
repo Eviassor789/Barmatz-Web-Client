@@ -17,6 +17,8 @@ function Chat_tile(props, key) {
     
   };
 
+  // console.log("props " + JSON.stringify(props));
+
 
   props.CurrentFriend==props.Name? active_tile=" active ":active_tile=""
 

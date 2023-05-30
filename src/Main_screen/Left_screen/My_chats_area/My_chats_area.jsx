@@ -7,53 +7,66 @@ import { Link } from "react-router-dom";
 function My_chats_area(props) {
 
   const Exit_link = useRef(null);
+  const [chats_items, Setchats_items] = useState("");
 
-  // works in refresh
-  if (props.LoggedUser == "") {
-    window.location.href = "/";
-  }
+  var i = "<div></div>"
 
-  if (props.CurrentFriend != ""){
-    users.get(props.LoggedUser).getFriends_Names().forEach(element => {
-      if (element.Name == props.CurrentFriend){
-        element.unread = 0;
-        
+  async function big() {
+    var data;
+
+    async function func() {
+      const res = await fetch("http://localhost:5000/api/Chats", {
+        method: "Get",
+        headers: {
+          accept: "application/json",
+          Authorization: "bearer " + props.LoggedUser_token,
+        },
+      });
+
+      if (res.ok && res.status == 200) {
+        data = await res.json();
+        console.log("data " + JSON.stringify(data));
+      } else {
+        console.error("Request failed with status:", res.status);
       }
-    });
-  }
+    }
 
-  var chats_items = "<div></div>";
+    await func();
 
-  console.log(props.LoggedUser + " this");
+    // if (props.CurrentFriend != ""){
+    //   users.get(props.LoggedUser).getFriends_Names().forEach(element => {
+    //     if (element.Name == props.CurrentFriend){
+    //       element.unread = 0;
 
+    //     }
+    //   });
+    // }
 
-  if (users.get(props.LoggedUser) != null) {
-    if (users.get(props.LoggedUser).Friends_Chat_List != null) {
-      chats_items = users.get(props.LoggedUser).getFriends_Names().map((friend) => (
+    // console.log(props.LoggedUser + " this");
+
+    if (data != null) {
+      console.log("again");
+      i = data.map((friend) => (
         <Chat_tile
-          img={users.get(friend.Name).getPicture()}
-          Nickname={users.get(friend.Name).getNickname()}
-          Name={users.get(friend.Name).getName()}
-          key={friend.Name}
+          img={friend.user.profilePic}
+          Nickname={friend.user.displayName}
+          Name={friend.user.username}
+          key={friend.id}
           CurrentFriend={props.CurrentFriend}
-          unread={friend.unread}
-          last={
-            users.get(friend.Name).isChatWith(props.LoggedUser)
-              ? users.get(friend.Name).getLastMsgFrom(props.LoggedUser)
-              : ""
-          }
-          date={
-            users.get(friend.Name).isChatWith(props.LoggedUser)
-              ? users.get(friend.Name).getLastTimeFrom(props.LoggedUser)
-              : ""
-          }
+          unread={0}
+          last={friend.lastMessage ? friend.lastMessage : ""}
+          date="25:00"
           SetCurrentFriend={props.SetCurrentFriend}
           LoggedUser={props.LoggedUser}
-          
         />
+        // <div>OOO</div>
       ));
+      Setchats_items(i);
     }
+    console.log("01 chats_items ");
   }
+  big();
+  console.log("02 chats_items ");
 
   return (
     <>
@@ -64,3 +77,32 @@ function My_chats_area(props) {
 }
 
 export default My_chats_area;
+
+
+// if (users.get(props.LoggedUser) != null) {
+//   if (data.length > 0) {
+//     chats_items = users.get(props.LoggedUser).getFriends_Names().map((friend) => (
+//       <Chat_tile
+//         img={users.get(friend.Name).getPicture()}
+//         Nickname={users.get(friend.Name).getNickname()}
+//         Name={users.get(friend.Name).getName()}
+//         key={friend.Name}
+//         CurrentFriend={props.CurrentFriend}
+//         unread={friend.unread}
+//         last={
+//           users.get(friend.Name).isChatWith(props.LoggedUser)
+//             ? users.get(friend.Name).getLastMsgFrom(props.LoggedUser)
+//             : ""
+//         }
+//         date={
+//           users.get(friend.Name).isChatWith(props.LoggedUser)
+//             ? users.get(friend.Name).getLastTimeFrom(props.LoggedUser)
+//             : ""
+//         }
+//         SetCurrentFriend={props.SetCurrentFriend}
+//         LoggedUser={props.LoggedUser}
+        
+//       />
+//     ));
+//   }
+// }
