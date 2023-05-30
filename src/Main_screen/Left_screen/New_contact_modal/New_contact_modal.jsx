@@ -47,7 +47,7 @@ function New_contact_modal(props) {
       return;
     }
 
-    
+
     
 
     var name = contactInput.current.value;
