@@ -84,7 +84,7 @@ class User {
           return x.Name == first ? -1 : y.Name == first ? 1 : 0;
         });
       }
-      console.log(this.getName() + " add " + Name);
+      // console.log(this.getName() + " add " + Name);
 
       //   users
       //     .get(Name)

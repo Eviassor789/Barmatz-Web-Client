@@ -4,23 +4,28 @@ import My_chats_area from "./My_chats_area/My_chats_area";
 import New_contact_modal from "./New_contact_modal/New_contact_modal";
 
 function Left_screen(props) {
+
+
+  
   return (
     <>
 
       <div id="left_screen" className={"col col-4 " + props.Mode}>
-        <My_name_area LoggedUser={props.LoggedUser} Mode={props.Mode} file={props.file}/>
+        <My_name_area LoggedUser={props.LoggedUser} Mode={props.Mode} file={props.file} LoggedUser_token={props.LoggedUser_token}/>
 
         <My_chats_area
           LoggedUser={props.LoggedUser}
           SetCurrentFriend={props.SetCurrentFriend}
           CurrentFriend={props.CurrentFriend}
           Mode={props.Mode}
+          LoggedUser_token={props.LoggedUser_token}
         />
       </div>
       <New_contact_modal
         LoggedUser={props.LoggedUser}
         setState={props.setState}
         state={props.state}
+        LoggedUser_token={props.LoggedUser_token}
       />
     </>
   );

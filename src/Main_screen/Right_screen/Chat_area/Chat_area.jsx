@@ -12,24 +12,24 @@ function Chat_area(props) {
   });
 
   var { msg_items } = "<div></div>";
-  if (props.CurrentFriend != "") {
-    if (
-      users.get(props.LoggedUser).getFriend_Chat_List(props.CurrentFriend).length >= 1
-    ) {
-      msg_items = users
-        .get(props.LoggedUser)
-        .getFriend_Chat_List(props.CurrentFriend)
-        .map((msg, key) => (
-          <Message
-            who={msg.from == props.LoggedUser ? "mine" : "yours"}
-            time={msg.time}
-            msg={msg.text}
-            key={key}
-            Mode={props.Mode}
-          />
-        ));
-    }
-  }
+  // if (props.CurrentFriend != "") {
+  //   if (
+  //     users.get(props.LoggedUser).getFriend_Chat_List(props.CurrentFriend).length >= 1
+  //   ) {
+  //     msg_items = users
+  //       .get(props.LoggedUser)
+  //       .getFriend_Chat_List(props.CurrentFriend)
+  //       .map((msg, key) => (
+  //         <Message
+  //           who={msg.from == props.LoggedUser ? "mine" : "yours"}
+  //           time={msg.time}
+  //           msg={msg.text}
+  //           key={key}
+  //           Mode={props.Mode}
+  //         />
+  //       ));
+  //   }
+  // }
 
   return <div id="chat_area" className={props.Mode}>{msg_items}</div>;
 }

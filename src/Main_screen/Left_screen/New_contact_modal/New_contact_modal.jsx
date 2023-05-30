@@ -27,21 +27,43 @@ function New_contact_modal(props) {
     });
   });
 
-  function addContact() {
-    var name = contactInput.current.value;
-    if(users.get(name) == null ) {
+  async function addContact() {
+
+    const data = {
+      "username": contactInput.current.value,
+    };
+
+      const res = await fetch("http://localhost:5000/api/Chats", {
+      method: "post",
+      headers: {  "accept": "*/*",
+                  "Authorization": "bearer " + props.LoggedUser_token,
+                  "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    
+    if (res.status != 200) {
       document.getElementById("errorsModals").innerHTML = "&ensp;no such contact"
       contactInput.current.addEventListener("input", cleanError);
       return;
     }
 
-    if (users.get(props.LoggedUser).IsYourFriend(name)) {
-      document.getElementById("errorsModals").innerHTML = "&ensp;contact is already your friend";
-      contactInput.current.addEventListener("input", cleanError);
-      return;
-    }
-    users.get(name).AddNewFriend(props.LoggedUser);
-    users.get(props.LoggedUser).AddNewFriend(name);
+
+    
+
+    var name = contactInput.current.value;
+    // if(users.get(name) == null ) {
+    //   document.getElementById("errorsModals").innerHTML = "&ensp;no such contact"
+    //   contactInput.current.addEventListener("input", cleanError);
+    //   return;
+    // }
+
+    // if (users.get(props.LoggedUser).IsYourFriend(name)) {
+    //   document.getElementById("errorsModals").innerHTML = "&ensp;contact is already your friend";
+    //   contactInput.current.addEventListener("input", cleanError);
+    //   return;
+    // }
+    // users.get(name).AddNewFriend(props.LoggedUser);
+    // users.get(props.LoggedUser).AddNewFriend(name);
     contactInput.current.value = "";
     close.current.click()
 

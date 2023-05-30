@@ -7,11 +7,12 @@ function Main_screen(props) {
   const [CurrentFriend, SetCurrentFriend] = useState("");
   const [state, RENDER] = useState(true);
 
-
-  
-
   var logged = props.LoggedUser;
 
+  // works in refresh
+  // if (logged == "") {
+  //   window.location.href = "/";
+  // }
 
   return (
     <>
@@ -23,6 +24,7 @@ function Main_screen(props) {
         setState={RENDER}
         state={state}
         Mode={props.Mode}
+        LoggedUser_token={props.LoggedUser_token}
       />
       <Right_screen
         LoggedUser={logged}
@@ -31,6 +33,7 @@ function Main_screen(props) {
         state={state}
         Mode={props.Mode}
         SetMode={props.SetMode}
+        LoggedUser_token={props.LoggedUser_token}
       />
     </>
   );

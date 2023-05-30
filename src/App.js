@@ -8,9 +8,10 @@ import Login from "./Login/Login";
 
 function App() {
 
-  console.log("users: " + users.get("watari"))
   const [LoggedUser, SetLoggedUser] = useState("");
   const [file, SetFile] = useState("");
+  const [LoggedUser_token, SetLoggedUser_token] = useState("");
+
 
   
   //   var user_mode = users.get(LoggedUser).getLight_mode() ? " light_mode" : "";
@@ -24,12 +25,12 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Login SetLoggedUser={SetLoggedUser} />}
+          element={<Login SetLoggedUser={SetLoggedUser} SetLoggedUser_token={SetLoggedUser_token} LoggedUser={LoggedUser}/>}
         ></Route>
         <Route path="/Register" element={<Register SetFile={SetFile}/>}></Route>
         <Route
           path="/Main_screen"
-          element={<Main_screen LoggedUser={LoggedUser} file={file} Mode={Mode} SetMode={SetMode}/>}
+          element={<Main_screen LoggedUser={LoggedUser} file={file} Mode={Mode} SetMode={SetMode} LoggedUser_token={LoggedUser_token}/>}
         ></Route>
       </Routes>
     </BrowserRouter>

@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 
 function Corrent_chat_name_area(props) {
   const handle_click = () => {
-    props.Mode == "" ? props.SetMode(" light_mode ") : props.SetMode("");
-    users.get(props.LoggedUser).setLight_mode();
+    // props.Mode == "" ? props.SetMode(" light_mode ") : props.SetMode("");
+    // users.get(props.LoggedUser).setLight_mode();
     console.log("color");
   };
 
-  users.get(props.LoggedUser).getLight_mode()? props.SetMode(" light_mode ") : props.SetMode("");
+  // users.get(props.LoggedUser).getLight_mode()? props.SetMode(" light_mode ") : props.SetMode("");
+  // props.SetMode("");
+
 
   if (props.CurrentFriend == "") {
 
@@ -32,9 +34,11 @@ function Corrent_chat_name_area(props) {
     return (
       <>
         <div id="corrent_chat_name_area" className={props.Mode}>
-          <img src={users.get(props.CurrentFriend).getPicture()}></img>
+          {/* <img src={users.get(props.CurrentFriend).getPicture()}></img> */}
+          <img src="#"></img>
           <span className="friend_name col">
-            {props.CurrentFriend==props.LoggedUser?"You": users.get(props.CurrentFriend).getNickname()}
+            {/* {props.CurrentFriend==props.LoggedUser?"You": users.get(props.CurrentFriend).getNickname()} */}
+            {props.CurrentFriend==props.LoggedUser?"You": "current friend name"}
           </span>
           <button id="sun" onClick={handle_click} className="btn color btn-lg btn-dark">
           <i className="bi bi-brightness-high-fill" onAbort={handle_click}></i>

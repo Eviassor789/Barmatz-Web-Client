@@ -42,15 +42,15 @@ function Input_area(props) {
     }
     let NowTime = H + ":" + M;
 
-    users
-      .get(props.LoggedUser)
-      .AddNewMsgTo(props.CurrentFriend, input.current.value, NowTime);
+    // users
+    //   .get(props.LoggedUser)
+    //   .AddNewMsgTo(props.CurrentFriend, input.current.value, NowTime);
 
-      if(props.LoggedUser != props.CurrentFriend){
-        users
-        .get(props.CurrentFriend)
-        .AddNewMsgFrom(props.LoggedUser, input.current.value, NowTime);
-      }
+    //   if(props.LoggedUser != props.CurrentFriend){
+    //     users
+    //     .get(props.CurrentFriend)
+    //     .AddNewMsgFrom(props.LoggedUser, input.current.value, NowTime);
+    //   }
 
 
     props.setState(!props.state);
@@ -60,11 +60,11 @@ function Input_area(props) {
 
   if (props.CurrentFriend == "") {
     console.log("press on tile or add friend");
-    return <div id="input_area" class ={props.Mode} ref={input_area}></div>;
+    return <div id="input_area" className ={props.Mode} ref={input_area}></div>;
   } else {
     console.log("you are ready to chat");
     return (
-      <div id="input_area" class ={props.Mode} ref={input_area}>
+      <div id="input_area" className ={props.Mode} ref={input_area}>
         <input
           className="col-9 col-xl-11 col-lg-10 col-md-10 col-sm-10"
           type="text"
