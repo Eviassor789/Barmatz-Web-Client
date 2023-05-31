@@ -1,8 +1,15 @@
-#my_chats_area {
+#My_chats_area {
     position: absolute;
     bottom: 0px;
     top: 80px;
     width: 100%;
-    border-bottom: 1px
+    border-bottom: 1px;
+}
+#My_chats_area::-webkit-scrollbar {display:none;}
+
+#My_chats_area {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 

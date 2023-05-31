@@ -16,6 +16,9 @@
 
 }
 
+#chat_area::-webkit-scrollbar {display:none;}
+
+
 /* light_mode */
 
 #chat_area.light_mode {

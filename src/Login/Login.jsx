@@ -37,7 +37,6 @@ function Login(props) {
   const validation = async function () {
     var incorrect = document.getElementById("incorrect");
     if (Name_input.current.value == "" || Password_input.current.value == "") {
-      console.log("empty");
       incorrect.innerHTML = "please fill all fields";
       Name_input.current.addEventListener("input", cleanIncorrect);
       Password_input.current.addEventListener("input", cleanIncorrect);
@@ -49,6 +48,7 @@ function Login(props) {
       "password": Password_input.current.value,
     };
 
+      console.log("fetch in Login");
       const res_for_token = await fetch("http://localhost:5000/api/Tokens", {
       method: "post",
       headers: {  "accept": "*/*",
@@ -68,9 +68,7 @@ function Login(props) {
     
     
 
-    console.log("yes");
     await props.SetLoggedUser(Name_input.current.value);
-    console.log("logged_ " + props.LoggedUser);
 
     props.SetLoggedUser_token(token);
     Enter_link.current.click();

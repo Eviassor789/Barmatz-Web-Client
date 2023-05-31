@@ -3,6 +3,7 @@ import users from "../../../Users_data/Users";
 import { useRef, useEffect } from "react";
 
 function New_contact_modal(props) {
+
   const contactInput = useRef(null);
   const close = useRef(null);
   const btn = useRef(null);
@@ -18,39 +19,43 @@ function New_contact_modal(props) {
   }
 
   function cleanError() {
-    document.getElementById("errorsModals").innerHTML = ""
+    document.getElementById("errorsModals").innerHTML = "";
   }
 
   useEffect(() => {
-    contactInput.current.addEventListener("keypress", function (event) {
-      PressEnter(event);
-    });
-  });
+      contactInput.current.addEventListener("keypress", PressEnter);
+  },[]);
 
   async function addContact() {
 
     const data = {
-      "username": contactInput.current.value,
+      username: contactInput.current.value,
     };
 
-      const res = await fetch("http://localhost:5000/api/Chats", {
+    console.log("fetch in New_contact_modal");
+    await fetch("http://localhost:5000/api/Chats", {
       method: "post",
-      headers: {  "accept": "*/*",
-                  "Authorization": "bearer " + props.LoggedUser_token,
-                  "Content-Type": "application/json" },
+      headers: {
+        accept: "*/*",
+        Authorization: "bearer " + props.LoggedUser_token,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
+    }).then(async (res) => {
+      // if(res.status == 401){
+      //   window.location.href = "/";
+      // }
+      if (res.status != 200) {
+        document.getElementById("errorsModals").innerHTML =
+          "&ensp;no such contact";
+        contactInput.current.addEventListener("input", cleanError);
+        return;
+      }
+      var name = contactInput.current.value;
+      contactInput.current.value = "";
+      close.current.click();
     });
-    
-    if (res.status != 200) {
-      document.getElementById("errorsModals").innerHTML = "&ensp;no such contact"
-      contactInput.current.addEventListener("input", cleanError);
-      return;
-    }
 
-
-    
-
-    var name = contactInput.current.value;
     // if(users.get(name) == null ) {
     //   document.getElementById("errorsModals").innerHTML = "&ensp;no such contact"
     //   contactInput.current.addEventListener("input", cleanError);
@@ -64,15 +69,10 @@ function New_contact_modal(props) {
     // }
     // users.get(name).AddNewFriend(props.LoggedUser);
     // users.get(props.LoggedUser).AddNewFriend(name);
-    contactInput.current.value = "";
-    close.current.click()
 
     props.setState(!props.state);
-
   }
-  
-  
-  
+
   return (
     <>
       <div
@@ -94,7 +94,11 @@ function New_contact_modal(props) {
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 ref={close}
-                onClick={cleanError}
+                onClick={() => {
+                  cleanError();
+                  contactInput.current.removeEventListener('keypress', PressEnter);
+                }
+              }
               ></button>
             </div>
             <div className="modal-body">
@@ -112,18 +116,21 @@ function New_contact_modal(props) {
                 id="cancel"
                 className="btn btn-danger"
                 data-bs-dismiss="modal"
-                onClick={cleanError}
+                onClick={() => {
+                  cleanError();
+                  contactInput.current.removeEventListener('keypress', PressEnter);
+
+                }
+              }
               >
                 Cancel
               </button>
               <button
-              ref={btn}
+                ref={btn}
                 type="button"
                 id="add"
                 className="btn btn-warning"
-                onClick={() => {
-                  addContact();
-                }}
+                onClick={addContact}
               >
                 Add contact
               </button>
@@ -136,3 +143,4 @@ function New_contact_modal(props) {
 }
 
 export default New_contact_modal;
+

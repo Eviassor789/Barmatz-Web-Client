@@ -11,14 +11,70 @@ function Chat_area(props) {
     element.scrollTop = element.scrollHeight;
   });
 
+  var data;
+  var temp = [];
   var { msg_items } = "<div></div>";
-  // if (props.CurrentFriend != "") {
+  const [list, Setlist] = useState([]);
+
+  function getTime(string) {
+    var secondHalf = string.split("T")[1];
+    var time = secondHalf.substring(0, 5);
+    return time;
+  }
+
+  if (props.CurrentChat > 0) {
+    (async () => {
+      console.log("fetch in Chat_area");
+      await fetch(
+        "http://localhost:5000/api/Chats/" + props.CurrentChat + "/Messages",
+        {
+          method: "Get",
+          headers: {
+            accept: "application/json",
+            Authorization: "bearer " + props.LoggedUser_token,
+          },
+        }
+      )
+        .then(async (res) => {
+          // if(res.status == 401){
+          //   window.location.href = "/";
+          // }
+          if (res.ok && res.status == 200) {
+            data = await res.json();
+          } else {
+            console.error("Request failed with status:", res.status);
+          }
+        })
+        .then(async () => {
+          if (data != null) {
+            temp = await data.map((msg, key) => {
+              return (
+                <Message
+                  who={
+                    msg.sender.username == props.LoggedUser ? "mine" : "yours"
+                  }
+                  time={getTime(msg.created)}
+                  msg={msg.content}
+                  ID={msg.id}
+                  key={msg.id}
+                  Mode={props.Mode}
+                />
+              );
+            });
+            if (JSON.stringify(temp) != JSON.stringify(list.reverse()))
+              Setlist(temp);
+          }
+        });
+    })();
+  }
+
+  // if (props.CurrentChat != "") {
   //   if (
-  //     users.get(props.LoggedUser).getFriend_Chat_List(props.CurrentFriend).length >= 1
+  //     users.get(props.LoggedUser).getFriend_Chat_List(props.CurrentChat).length >= 1
   //   ) {
   //     msg_items = users
   //       .get(props.LoggedUser)
-  //       .getFriend_Chat_List(props.CurrentFriend)
+  //       .getFriend_Chat_List(props.CurrentChat)
   //       .map((msg, key) => (
   //         <Message
   //           who={msg.from == props.LoggedUser ? "mine" : "yours"}
@@ -31,7 +87,11 @@ function Chat_area(props) {
   //   }
   // }
 
-  return <div id="chat_area" className={props.Mode}>{msg_items}</div>;
+  return (
+    <div id="chat_area" className={props.Mode}>
+      {props.CurrentChat <= 0 ? "" :list.reverse()}
+    </div>
+  );
 }
 
 export default Chat_area;
