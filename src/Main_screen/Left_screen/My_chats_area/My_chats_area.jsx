@@ -9,53 +9,75 @@ function My_chats_area(props) {
   const [friend_List, SetFriend_List] = useState("");
   const [chats, Setchats] = useState("");
 
-  var chat_items = "<div></div>";
+  var { chat_items } = "<div></div>";
 
   var data;
-  // var res;
-  (async () => {
-    await fetch("http://localhost:5000/api/Chats", {
-      method: "Get",
-      headers: {
-        accept: "application/json",
-        Authorization: "bearer " + props.LoggedUser_token,
-      },
-    }).then( async (res)=>{
-      if (res.ok && res.status == 200) {
-        data = await res.json();
-        console.log("data " + JSON.stringify(data));
-      } else {
-        console.error("Request failed with status:", res.status);
-      }
-    }).then( ()=>{
-      if (data != null) {
-        console.log("again");
-        chat_items = data.map((friend) => (
-          <Chat_tile
-            img={friend.user.profilePic}
-            Nickname={friend.user.displayName}
-            Name={friend.user.username}
-            key={friend.id}
-            CurrentFriend={props.CurrentFriend}
-            unread={3}
-            last={friend.lastMessage ? friend.lastMessage : ""}
-            date="25:00"
-            SetCurrentFriend={props.SetCurrentFriend}
-            LoggedUser={props.LoggedUser}
-          />
-        ));
-        
-      }
-    }).then(()=>{
-      if(!(JSON.stringify(data) == JSON.stringify(friend_List)) && !(JSON.stringify(chats) == JSON.stringify(chat_items))){
-        SetFriend_List(data);
-        Setchats(chat_items);
-      }
-      console.log("chats");
-    });
 
-    
-  })();
+  function getTime(string) {
+    var secondHalf = string.split("T")[1];
+    var time = secondHalf.substring(0, 5);
+    return time;
+  }
+
+  function getChatsFetch(){
+    (async () => {
+      console.log("fetch in My_chats area");
+      await fetch("http://localhost:5000/api/Chats", {
+        method: "Get",
+        headers: {
+          accept: "application/json",
+          Authorization: "bearer " + props.LoggedUser_token,
+        },
+      })
+        .then(async (res) => {
+          // if(res.status == 401){
+          //   window.location.href = "/";
+          // }
+          if (res.ok && res.status == 200) {
+            data = await res.json();
+          } else {
+            console.error("Request failed with status:", res.status);
+          }
+        })
+        .then(() => {
+          if (data != null) {
+            chat_items = data.map((friend) => (
+              <Chat_tile
+                img={friend.user.profilePic}
+                Nickname={friend.user.displayName}
+                Name={friend.user.username}
+                ID={friend.id}
+                CurrentChat={props.CurrentChat}
+                unread={0}
+                last={friend.lastMessage ? friend.lastMessage.content : ""}
+                date={
+                  friend.lastMessage ? getTime(friend.lastMessage.created) : ""
+                }
+                SetCurrentChat={props.SetCurrentChat}
+                LoggedUser={props.LoggedUser}
+                left={props.left}
+                Mode={props.Mode}
+                SetCurrentUser={props.SetCurrentUser}
+                LoggedUser_token={props.LoggedUser_token}
+              />
+            ));
+          }
+        })
+        .then(() => {
+          if (!(JSON.stringify(chats) == JSON.stringify(chat_items))) {
+            SetFriend_List(data);
+            Setchats(chat_items);
+          }
+        });
+    })();
+  }
+
+  // if (props.CurrentChat == 0) {
+    getChatsFetch();
+  // }
+
+
+
 
   // if (props.CurrentFriend != ""){
   //   users.get(props.LoggedUser).getFriends_Names().forEach(element => {
@@ -66,18 +88,11 @@ function My_chats_area(props) {
   //   });
   // }
 
-  // console.log(props.LoggedUser + " this");
-
-  
-  // console.log("01 chats_items ");
-
-
-
   return (
-    <>
+    <div id="My_chats_area">
       {chats}
       <Link id="exit" to="/" ref={Exit_link}></Link>
-    </>
+    </div>
   );
 }
 

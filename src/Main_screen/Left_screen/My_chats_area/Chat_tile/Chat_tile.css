@@ -2,7 +2,6 @@
     border: 1px;
     border-style: solid;
     border-color: #b0b0b049;
-    /* border-radius: 6pt; */
     background-color: #111b21;
     height: 70px;
     width: 100%;
@@ -47,21 +46,48 @@
 }
 
 
-.last_msg {
+
+
+.friend_time {
+    width: min-content;
+    height: 40%;
     font-size: small;
-    color: #dededead;
+    color: #dededede;
+    position: relative;
+    /* top: 0px; */
+    right: 0px;
+    left: 0px;
+    top: 15%;
+    margin: auto;
+    /* padding: auto; */
+
 }
 
-.chat_tile>.friend_time {
+.chat_tile>.delete_friend {
     width: min-content;
-    font-size: x-small;
+    font-size: small;
     color: #dededead;
-    position: relative;
-    /* float: right; */
-    right: 0px;
-    margin-right: 10px;
-    padding: auto;
+    position: absolute;
+    bottom: 0px;
+    margin: auto;
+    bottom: 0px;
+}
 
+.trash {
+    bottom: 0px;
+
+}
+
+.trash:active {
+    background-color: #2f4c5edd !important;
+}
+
+.trash_and_time {
+    align-items: center;
+    position: absolute;
+    padding-right: 5px;
+    right: 0px;
+    height: inherit;
 }
 
 .circle{
@@ -88,7 +114,9 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
+    bottom: 2%;
+    font-size: small;
+    color: #dededead;
 }
 
 #others_profile {

@@ -141,60 +141,85 @@ function Register(props) {
       return;
     }
 
-    function toDataURL(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        var reader = new FileReader();
-        reader.onloadend = function() {
+    // function toDataURL(url, callback) {
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.onload = function() {
+    //     var reader = new FileReader();
+    //     reader.onloadend = function() {
+    //       callback(reader.result);
+    //     }
+    //     reader.readAsDataURL(xhr.response);
+    //   };
+    //   xhr.open('GET', url);
+    //   xhr.responseType = 'blob';
+    //   xhr.send();
+    // }
+    var picBase64 = {};
+    var data = {};
+    (() => {
+      function convertImageToBase64(file, callback) {
+        const reader = new FileReader();
+        reader.onloadend = function () {
           callback(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      convertImageToBase64(
+        Picture_input.current.files[0],
+        async function (base64) {
+          // Send the base64 string to the server
+          picBase64 = base64;
+
+          data = {
+            username: Name_input.current.value,
+            password: Password_input.current.value,
+            displayName: Nickname_input.current.value,
+            profilePic: picBase64,
+          };
+          console.log("fetch in Register");
+          const res = await fetch("http://localhost:5000/api/Users", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          if (res.status == 409) {
+            console.log("Name already taken");
+            document.getElementById("nameDiv").innerHTML = "Name already taken";
+            Name_input.current.addEventListener("input", cleanName);
+            return;
+          }
+
+          console.log("user added succesfuly!");
+
+          Enter_link.current.click();
         }
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.send();
-    }
-    
-    var picUrl;
-    toDataURL(URL.createObjectURL(Picture_input.current.files[0]), function(dataUrl) {
-      picUrl = dataUrl
-    })
-    
+      );
+    })();
 
-    const data = {
-      username: Name_input.current.value,
-      password: Password_input.current.value,
-      displayName: Nickname_input.current.value,
-      profilePic: URL.createObjectURL(Picture_input.current.files[0]),
-    };
+    // toDataURL(URL.createObjectURL(), function(dataUrl) {
+    //   picUrl = dataUrl
+    // })
 
-    const res = await fetch("http://localhost:5000/api/Users", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (res.status == 409) {
-      console.log("Name already taken");
-      document.getElementById("nameDiv").innerHTML = "Name already taken";
-      Name_input.current.addEventListener("input", cleanName);
-      return;
-    }
+    // const data = {
+    //   username: Name_input.current.value,
+    //   password: Password_input.current.value,
+    //   displayName: Nickname_input.current.value,
+    //   profilePic: picBase64,
+    // };
+    // console.log("base64 " + picBase64);
 
     // DELETE IN THE END
-    users.set(
-      Name_input.current.value,
-      new User({
-        Name: Name_input.current.value,
-        Password: Password_input.current.value,
-        Nickname: Nickname_input.current.value,
-        Picture: URL.createObjectURL(Picture_input.current.files[0]),
-      })
-    );
-
-    console.log("user added succesfuly!");
-
-    Enter_link.current.click();
+  //   users.set(
+  //     Name_input.current.value,
+  //     new User({
+  //       Name: Name_input.current.value,
+  //       Password: Password_input.current.value,
+  //       Nickname: Nickname_input.current.value,
+  //       Picture: URL.createObjectURL(Picture_input.current.files[0]),
+  //     })
+  //   );
   };
 
   return (
@@ -280,7 +305,6 @@ function Register(props) {
               ref={Picture_input}
               onChange={() => {
                 const file = Picture_input.current.files;
-                props.SetFile(file[0]);
                 imagesArray.push(file[0]);
                 displayImages();
               }}
