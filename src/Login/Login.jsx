@@ -66,11 +66,15 @@ function Login(props) {
       return;
     }
     
+    function sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
     
 
     await props.SetLoggedUser(Name_input.current.value);
 
     props.SetLoggedUser_token(token);
+    await sleep(50);
     Enter_link.current.click();
     
     // if (users.get(Name_input.current.value) == null) {

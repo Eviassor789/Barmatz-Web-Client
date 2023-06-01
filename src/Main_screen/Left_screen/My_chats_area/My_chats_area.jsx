@@ -12,6 +12,7 @@ function My_chats_area(props) {
   var { chat_items } = "<div></div>";
 
   var data;
+  var sorted_data;
 
   function getTime(string) {
     var secondHalf = string.split("T")[1];
@@ -19,7 +20,37 @@ function My_chats_area(props) {
     return time;
   }
 
-  function getChatsFetch(){
+  function sort(data) {
+    const compareDates = (a, b) => {
+      var dateA;
+      var dateB;
+      if (a.lastMessage == null && b.lastMessage == null) {
+        dateA = 0;
+        dateB = 0;
+      } else if (a.lastMessage == null && b.lastMessage != null) {
+        dateA = 0;
+        dateB = new Date(b.lastMessage.created);
+      } else if (b.lastMessage == null && a.lastMessage != null) {
+        dateA = new Date(a.lastMessage.created);
+        dateB = 0;
+      } else {
+        dateA = new Date(a.lastMessage.created);
+        dateB = new Date(b.lastMessage.created);
+      }
+
+      return dateB - dateA;
+    };
+
+    // Sort the array using the comparison function
+    var sorted = data.sort(compareDates);
+    console.log("sorted " + JSON.stringify(sorted));
+    console.log("data " + JSON.stringify(data));
+    // console.log("chat_items " + JSON.stringify(chat_items));
+
+    return sorted;
+  }
+
+  function getChatsFetch() {
     (async () => {
       console.log("fetch in My_chats area");
       await fetch("http://localhost:5000/api/Chats", {
@@ -30,9 +61,10 @@ function My_chats_area(props) {
         },
       })
         .then(async (res) => {
-          // if(res.status == 401){
-          //   window.location.href = "/";
-          // }
+          if(res.status == 401){
+            // && props.LoggedUser_token != ""
+            window.location.href = "/";
+          }
           if (res.ok && res.status == 200) {
             data = await res.json();
           } else {
@@ -41,7 +73,8 @@ function My_chats_area(props) {
         })
         .then(() => {
           if (data != null) {
-            chat_items = data.map((friend) => (
+            sorted_data = sort(data);
+            chat_items = sorted_data.map((friend) => (
               <Chat_tile
                 img={friend.user.profilePic}
                 Nickname={friend.user.displayName}
@@ -62,10 +95,13 @@ function My_chats_area(props) {
               />
             ));
           }
+          // console.log("sorted_data " + JSON.stringify(sorted_data));
+          // console.log("data " + JSON.stringify(data) );
+          // console.log("chat_items " + JSON.stringify(chat_items));
         })
         .then(() => {
           if (!(JSON.stringify(chats) == JSON.stringify(chat_items))) {
-            SetFriend_List(data);
+            SetFriend_List(sorted_data);
             Setchats(chat_items);
           }
         });
@@ -73,11 +109,8 @@ function My_chats_area(props) {
   }
 
   // if (props.CurrentChat == 0) {
-    getChatsFetch();
+  getChatsFetch();
   // }
-
-
-
 
   // if (props.CurrentFriend != ""){
   //   users.get(props.LoggedUser).getFriends_Names().forEach(element => {
