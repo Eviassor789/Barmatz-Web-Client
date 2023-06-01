@@ -12,7 +12,7 @@ function My_name_area(props) {
   // };
 
   console.log("my_name " + my_name_pic[0]);
-  // if (my_name == "") {
+  if (props.LoggedUser != "") {
   (async () => {
     console.log("fetch in My_name_area");
     await fetch("http://localhost:5000/api/Users/" + props.LoggedUser, {
@@ -22,7 +22,8 @@ function My_name_area(props) {
         Authorization: "bearer " + props.LoggedUser_token,
       },
     }).then(async (res) => {
-      // if((res.status == 401)){
+      // if((res.status == 401) ){
+      //   //&& my_name_pic[0] != null
       //   window.location.href = "/";
       // }
       var data;
@@ -39,7 +40,7 @@ function My_name_area(props) {
       }
     });
   })();
-  // }
+  }
   return (
     <>
       <div id="my_name_area" className={props.Mode}>
