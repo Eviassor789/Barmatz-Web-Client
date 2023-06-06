@@ -43,8 +43,8 @@ function My_chats_area(props) {
 
     // Sort the array using the comparison function
     var sorted = data.sort(compareDates);
-    console.log("sorted " + JSON.stringify(sorted));
-    console.log("data " + JSON.stringify(data));
+    // console.log("sorted " + JSON.stringify(sorted));
+    // console.log("data " + JSON.stringify(data));
     // console.log("chat_items " + JSON.stringify(chat_items));
 
     return sorted;

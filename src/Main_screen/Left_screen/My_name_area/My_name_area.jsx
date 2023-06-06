@@ -11,7 +11,7 @@ function My_name_area(props) {
   //   "password": Password_input.current.value,
   // };
 
-  console.log("my_name " + my_name_pic[0]);
+  // console.log("my_name " + my_name_pic[0]);
   if (props.LoggedUser != "") {
   (async () => {
     console.log("fetch in My_name_area");

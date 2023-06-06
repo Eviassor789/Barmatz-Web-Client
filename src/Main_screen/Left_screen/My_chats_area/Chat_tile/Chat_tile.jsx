@@ -21,6 +21,7 @@ function Chat_tile(props) {
   }
 
   const SetCurrentChatt = (event) => {
+    console.log("show " + props.CurrentChat)
 
     if(document.getElementById("trash").contains(event.target)){
       return;
@@ -38,7 +39,12 @@ function Chat_tile(props) {
     
   };
 
+  function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   async function delete_chat() {
+    console.log("delete")
 
     console.log("fetch in chat_tile");
       await fetch(
@@ -57,6 +63,7 @@ function Chat_tile(props) {
       props.SetCurrentChat(temp);
       console.log("render");
       Setrender(!render);
+      sleep(50);
   }
 
 
