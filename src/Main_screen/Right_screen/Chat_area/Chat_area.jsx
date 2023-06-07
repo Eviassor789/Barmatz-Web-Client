@@ -65,7 +65,7 @@ function Chat_area(props) {
             });
             console.log("temp " + JSON.stringify(temp));
             console.log("JSON.stringify(list) " + JSON.stringify(list));
-            temp.reverse();
+            // temp.reverse(); DELETE
             if (JSON.stringify(temp) != JSON.stringify(list))
               Setlist(temp);
           }
