@@ -11,7 +11,6 @@ function App() {
   const [LoggedUser, SetLoggedUser] = useState("");
   const [LoggedUser_token, SetLoggedUser_token] = useState("");
 
-
   
   //   var user_mode = users.get(LoggedUser).getLight_mode() ? " light_mode" : "";
 

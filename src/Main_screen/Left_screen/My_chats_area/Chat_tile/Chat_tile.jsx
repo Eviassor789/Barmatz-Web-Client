@@ -1,5 +1,6 @@
 import "./Chat_tile.css";
 import { useEffect, useState } from "react";
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
 
 function Chat_tile(props) {
@@ -61,7 +62,11 @@ function Chat_tile(props) {
       })
       var temp = props.CurrentChat==0? -1 : 0;
       props.SetCurrentChat(temp);
-      console.log("render");
+      // console.log("render");
+
+      const socket = io.connect("http://localhost:3333");
+      socket.emit("delete_chat", props.Name);
+
       Setrender(!render);
       sleep(50);
   }

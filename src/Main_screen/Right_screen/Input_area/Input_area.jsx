@@ -1,7 +1,15 @@
 import "./Input_area.css";
 import users from "../../../Users_data/Users";
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
 
 import { useRef, useState, useEffect } from "react";
+
+// const socket = io.connect("http://localhost:3333");
+// socket.emit("foo", "bar");
+// socket.on("hello", function(msg) {
+//   console.log(msg);
+// });
 
 function Input_area(props) {
   const input_area = useRef(null);
@@ -81,29 +89,8 @@ function Input_area(props) {
       });
     })();
 
-
-
-    // let currDate = new Date();
-    // let H = currDate.getHours();
-    // let M = currDate.getMinutes();
-
-    // if (currDate.getHours() < 10) {
-    //   H = "0" + currDate.getHours();
-    // }
-    // if (currDate.getMinutes() < 10) {
-    //   M = "0" + currDate.getMinutes();
-    // }
-    // let NowTime = H + ":" + M;
-
-    // users
-    //   .get(props.LoggedUser)
-    //   .AddNewMsgTo(props.CurrentFriend, input.current.value, NowTime);
-
-    //   if(props.LoggedUser != props.CurrentFriend){
-    //     users
-    //     .get(props.CurrentFriend)
-    //     .AddNewMsgFrom(props.LoggedUser, input.current.value, NowTime);
-    //   }
+    const socket = io.connect("http://localhost:3333");
+    socket.emit("sent_message", props.CurrentUser);
   }
 
   if (props.CurrentChat <= 0) {

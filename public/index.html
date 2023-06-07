@@ -30,6 +30,14 @@
 </head>
 
 <body>
+  <script type="module">
+    import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+    const socket = io.connect("http://localhost:3333");
+    socket.emit("message_render", "bar");
+    socket.on("hello", function(msg) {
+      console.log(msg);
+    });
+  </script>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 

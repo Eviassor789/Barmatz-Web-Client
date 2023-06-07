@@ -30,6 +30,7 @@ function Right_screen(props) {
           state={props.state}
           LoggedUser={props.LoggedUser}
           CurrentChat={props.CurrentChat}
+          CurrentUser={props.CurrentUser}
           Mode={props.Mode}
           LoggedUser_token={props.LoggedUser_token}
         />

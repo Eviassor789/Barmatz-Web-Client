@@ -1,12 +1,16 @@
 import "./Main_screen.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Left_screen from "./Left_screen/Left_screen";
 import Right_screen from "./Right_screen/Right_screen";
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
 
 function Main_screen(props) {
   const [CurrentChat, SetCurrentChat] = useState(0);
   const [CurrentUser, SetCurrentUser] = useState({});
   const [state, RENDER] = useState(true);
+
+
 
   var logged = props.LoggedUser;
   
@@ -18,6 +22,30 @@ function Main_screen(props) {
   function left(id) {
     SetCurrentChat(id);
   }
+
+  const socket = io.connect("http://localhost:3333");
+    socket.on("message_render", function(msg) {
+    console.log("yes io io io message_render");
+    RENDER(!state);
+  });
+  socket.on("add_chat_render", function(msg) {
+    console.log("yes io io io add_chat_render");
+    RENDER(!state);
+  });
+  socket.on("delete_chat_render", function(msg) {
+    console.log("yes io io io delete_chat_render");
+    SetCurrentChat(CurrentChat==0? -1 : 0);
+  });
+
+
+
+  // useEffect (()=> {
+  //   socket.on("message_render", function(user) {
+  //     if (logged == user) {
+  //       RENDER(!state);
+  //     }
+  //   });
+  // }, [socket])
 
    
 

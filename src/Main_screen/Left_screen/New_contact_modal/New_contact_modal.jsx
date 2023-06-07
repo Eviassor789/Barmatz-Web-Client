@@ -1,6 +1,8 @@
 import "./New_contact_modal.css";
 import users from "../../../Users_data/Users";
 import { useRef, useEffect } from "react";
+import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
 
 function New_contact_modal(props) {
 
@@ -69,6 +71,9 @@ function New_contact_modal(props) {
     // }
     // users.get(name).AddNewFriend(props.LoggedUser);
     // users.get(props.LoggedUser).AddNewFriend(name);
+
+    const socket = io.connect("http://localhost:3333");
+    socket.emit("add_chat", contactInput.current.value);
 
     props.setState(!props.state);
   }
