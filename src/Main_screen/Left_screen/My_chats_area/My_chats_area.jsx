@@ -67,14 +67,15 @@ function My_chats_area(props) {
           }
           if (res.ok && res.status == 200) {
             data = await res.json();
+            await data.sort((a, b) => a.id - b.id);
           } else {
             console.error("Request failed with status:", res.status);
           }
         })
-        .then(() => {
+        .then(async () => {
           if (data != null) {
             sorted_data = sort(data);
-            chat_items = sorted_data.map((friend) => (
+            chat_items = await sorted_data.map((friend) => (
               <Chat_tile
                 img={friend.user.profilePic}
                 Nickname={friend.user.displayName}

@@ -41,6 +41,8 @@ function Chat_area(props) {
           // }
           if (res.ok && res.status == 200) {
             data = await res.json();
+            console.log("data " + JSON.stringify(data));
+            await data.sort((a, b) => a.id - b.id);
           } else {
             console.error("Request failed with status:", res.status);
           }
@@ -61,7 +63,10 @@ function Chat_area(props) {
                 />
               );
             });
-            if (JSON.stringify(temp) != JSON.stringify(list.reverse()))
+            console.log("temp " + JSON.stringify(temp));
+            console.log("JSON.stringify(list) " + JSON.stringify(list));
+            temp.reverse();
+            if (JSON.stringify(temp) != JSON.stringify(list))
               Setlist(temp);
           }
         });
@@ -89,7 +94,7 @@ function Chat_area(props) {
 
   return (
     <div id="chat_area" className={props.Mode}>
-      {props.CurrentChat <= 0 ? "" :list.reverse()}
+      {props.CurrentChat <= 0 ? "" :list}
     </div>
   );
 }
