@@ -126,11 +126,11 @@ function Register(props) {
       return;
     }
 
-    if (passwordIsValid() == false) {
-      showRules();
-      Password_input.current.addEventListener("input", cleanRules);
-      return;
-    }
+    // if (passwordIsValid() == false) {
+    //   showRules();
+    //   Password_input.current.addEventListener("input", cleanRules);
+    //   return;
+    // }
 
     if (Password_input.current.value != Verify_password_input.current.value) {
       console.log("passwords are not identicle");
