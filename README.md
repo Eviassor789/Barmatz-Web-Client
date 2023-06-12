@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+<h1 align="center">AP-EX3-App</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  An internet chat application made with HTML, CSS, BOOTSTRAP, JAVASCRIPT, JQUERY, REACT, and MONGODB. <br/>
+  The app fetches the appropriate screens (register, login, chats) from the appropriate designated server which holds all the data in the database. <br/>
+</div>
+<br/>
+Features: <br/>
+-You can register with a new profile for yourself, a nickname and a local image of your choice, and add new contacts to chat with, as you wish, so long they exist. <br/>
+-Dark mode and Bright mode setting, which the app remembers for each user seperatly, even after logging out. <br/>
+-Error messages when trying to register with invalid input that the fields require. <br/>
+-Displays the number of messages waiting to be read in a chat. <br/>
+-The user can add a new contact to chat with if he is registered in the data base, and relevant error messages when somethings wrong. <br/>
+-The user can scroll up and down the chat when its long. <br/>
+-When rendering a new message, the chat automatically scrolls all the way down to show the new message. <br/>
+-The app displays the last message in the chat with a contact, along with the time it was sent, just under the contacts profile. <br/>
+-When user A sends a message to user B, the server automatically updates user B. <br/>
+-Every input written to a field, can also be submitted by simply pressing the Enter button, whether it is the register, login, or main screen. <br/>
+-Refreshing the page reverts all changes and takes you back to the login screen. <br/>
 
-## Available Scripts
+## Links
 
-In the project directory, you can run:
+- [Repo](https://github.com/netnnn/AP-Ex3 "AP-Ex3 Repo")
 
-### `npm start`
+## How to run
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To start the application:
+1. Download the contents.
+2. Open the contents directory inside the terminal.
+3. run "npm start" (may need to run "npm run build" if its the first time).
+4. The website will automatically open and run on your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Authors
 
-### `npm test`
+**Netanel Teller**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Profile](https://github.com/netnnn)
+- [Email](netanel7227@gmail.com)
 
-### `npm run build`
+**Evyatar Assor**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Profile](https://github.com/Eviassor789)
+- [Email](eviassor@gmail.com)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Ariel Barmats**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Profile](https://github.com/arielbarmats)
+- [Email](ariel.barmats@gmail.com)
